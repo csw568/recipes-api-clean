@@ -29,4 +29,3 @@ class RecipeRating(models.Model):
         ordering = ["-created_at"]
         
 
-

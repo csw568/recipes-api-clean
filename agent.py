@@ -174,7 +174,7 @@ Once a review is generated, you need to run a final check and post it to GitHub.
 - Include notes on whether new endpoints were documented.
 - Include suggestions on which lines could be improved upon, and these lines should be quoted.
 If the review does not meet this criteria, you must ask the CommentorAgent to rewrite and address these concerns.
-When you are satisfied, save the final review and post it to GitHub.""",
+When you are satisfied, you MUST call add_final_review_to_state to save it, then you MUST call post_review_to_github to post it. Do not just output the review as text — you must invoke both tools.""",
         can_handoff_to=["CommentorAgent"],
     )
 

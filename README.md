@@ -64,4 +64,3 @@ Please read [CONTRIBUTING.md](https://github.com/the-nulldev/recipes-api/blob/ma
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](https://github.com/the-nulldev/recipes-api/blob/main/LICENSE) for details.
-

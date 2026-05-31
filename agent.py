@@ -102,7 +102,7 @@ async def add_final_review_to_state(ctx: Context, final_review: str) -> str:
 def post_review_to_github(pr_number: int, comment: str) -> str:
     """Use this tool to post the final review comment to a pull request on GitHub."""
     pull_request = get_repo().get_pull(pr_number)
-    pull_request.create_review(body=comment)
+    pull_request.create_review(body=comment, event="COMMENT")
     return f"Review posted successfully to PR #{pr_number}."
 
 

@@ -201,19 +201,30 @@ async def main():
     handler = workflow_agent.run(prompt.format())
 
     current_agent = None
+    final_review_text = None
+    review_posted = False
+
     async for event in handler.stream_events():
         if hasattr(event, "current_agent_name") and event.current_agent_name != current_agent:
             current_agent = event.current_agent_name
             print(f"Current agent: {current_agent}")
         elif isinstance(event, AgentOutput):
             if event.response.content:
+                final_review_text = event.response.content
                 print(f"\n\nFinal response: {event.response.content}")
             if event.tool_calls:
                 print("Selected tools: ", [call.tool_name for call in event.tool_calls])
         elif isinstance(event, ToolCallResult):
             print(f"Output from tool: {event.tool_output}")
+            if "Review posted successfully" in str(event.tool_output):
+                review_posted = True
         elif isinstance(event, ToolCall):
             print(f"Calling selected tool: {event.tool_name}, with arguments: {event.tool_kwargs}")
+
+    if not review_posted and final_review_text and pr_number:
+        print("Agent did not post review via tool. Posting directly...")
+        result = post_review_to_github(int(pr_number), final_review_text)
+        print(result)
 
 
 if __name__ == "__main__":

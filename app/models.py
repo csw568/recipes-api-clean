@@ -28,3 +28,4 @@ class RecipeRating(models.Model):
         unique_together = ("recipe", "user")
         ordering = ["-created_at"]
         
+

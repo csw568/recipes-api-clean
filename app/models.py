@@ -27,3 +27,4 @@ class RecipeRating(models.Model):
     class Meta:
         unique_together = ("recipe", "user")
         ordering = ["-created_at"]
+        
